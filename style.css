@@ -1,38 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
-    background: #0b0b0f;
+    background: linear-gradient(180deg, #050508, #0b0b14);
     color: white;
-    font-family: Arial;
+    font-family: 'Inter', sans-serif;
+    overflow: hidden;
 }
 
+/* LOGO */
 .logo {
-    text-align: center;
-    color: #a855f7;
+    position: fixed;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: 800;
+    letter-spacing: 3px;
+    color: #b26cff;
+    z-index: 10;
 }
 
+/* FEED */
 .feed {
-    height: 80vh;
+    height: 100vh;
+    scroll-snap-type: y mandatory;
     overflow-y: scroll;
 }
 
+/* POST */
 .post {
     height: 100vh;
-    padding: 30px;
-    border-bottom: 1px solid #222;
+    padding: 40px 25px;
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    background: radial-gradient(circle at top, #141427, #06060b);
+    animation: fadeIn 0.6s ease;
 }
 
+/* TESTI */
+.post h2 {
+    font-size: 28px;
+    margin: 0;
+}
+
+.post p {
+    opacity: 0.7;
+    margin: 5px 0 20px;
+}
+
+/* AUDIO */
 audio {
     width: 100%;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 0 10px #a855f7);
 }
 
+/* MOOD */
 .mood {
+    font-size: 14px;
     color: #a855f7;
+    opacity: 0.9;
 }
 
+/* FORM */
 .add-post {
     position: fixed;
-    bottom: 0;
-    width: 100%;
-    background: #111;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
+    gap: 5px;
+    z-index: 10;
+}
+
+.add-post input {
+    background: #0e0e18;
+    border: 1px solid #222;
+    color: white;
+    padding: 8px;
+    border-radius: 8px;
+    outline: none;
+}
+
+.add-post button {
+    background: linear-gradient(135deg, #a855f7, #ec4899);
+    border: none;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* ANIMAZIONI */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.97);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
