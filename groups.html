@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>VYBE | COVES</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<h1>COVES 🕳</h1>
+
+{% for g in groups %}
+<div class="group">
+    <h2>{{ g[1] }}</h2>
+    <span>{{ g[2] }}</span>
+</div>
+{% endfor %}
+
+</body>
+</html>

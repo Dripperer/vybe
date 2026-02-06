@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>VYBE</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<h1 class="logo">⟡ VYBE</h1>
+
+<div class="feed">
+    {% for post in posts %}
+    <div class="post">
+        <h2>{{ post[1] }}</h2>
+        <p>{{ post[2] }}</p>
+        <audio controls>
+            <source src="{{ post[3] }}">
+        </audio>
+        <span class="mood">{{ post[4] }}</span>
+    </div>
+    {% endfor %}
+</div>
+
+<form action="/add" method="post" class="add-post">
+    <input name="song" placeholder="Song">
+    <input name="artist" placeholder="Artist">
+    <input name="clip" placeholder="Audio URL">
+    <input name="mood" placeholder="Mood">
+    <button>POST</button>
+</form>
+
+<script src="/static/script.js"></script>
+</body>
+</html>
