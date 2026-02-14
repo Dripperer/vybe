@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1 class="logo">⟡ VYBE FEED</h1>
+
+<div class="feed">
+    {% for post in posts %}
+    <div class="post">
+        <div class="post-header">
+            <img src="{{ post['avatar'] }}" class="avatar">
+            <a href="{{ url_for('profile', username=post['username']) }}" class="username">
+                {{ post["username"] }}
+            </a>
+        </div>
+
+        <img src="{{ post['cover'] }}" class="cover">
+
+        <h2>{{ post["song"] }}</h2>
+        <p class="artist">{{ post["artist"] }}</p>
+
+        {% if post["clip_type"] == "spotify" %}
+            <iframe style="border-radius:12px"
+                src="https://open.spotify.com/embed/track/{{ post['clip'].split('/')[-1] }}"
+                width="100%" height="80" frameBorder="0" allow="encrypted-media">
+            </iframe>
+        {% elif post["clip_type"] == "mp3" %}
+            <audio controls>
+                <source src="{{ post["clip"] }}">
+            </audio>
+        {% else %}
+            <a href="{{ post['clip'] }}" target="_blank" class="external-link">
+                Ascolta su {{ post["clip_type"]|capitalize }}
+            </a>
+        {% endif %}
+
+        <div class="post-footer">
+            <span class="mood mood-{{ post['mood']|lower }}">{{ post["mood"] }}</span>
+            <a href="/like/{{ post['id'] }}" class="like-btn">❤️ {{ post["likes"] }}</a>
+        </div>
+
+        <form class="comment-form" action="/comment/{{ post['id'] }}" method="post">
+            <input type="text" name="text" placeholder="Scrivi un commento..." required>
+            <button type="submit">Invia</button>
+        </form>
+    </div>
+    {% endfor %}
+</div>
+
+{% if current_user %}
+<form class="add-post" action="/add" method="post">
+    <h2>Crea un nuovo post</h2>
+    <input type="text" name="song" placeholder="Song" required>
+    <input type="text" name="artist" placeholder="Artist" required>
+    <input type="text" name="clip" placeholder="Link MP3 o Spotify/YouTube" required>
+    <input type="text" name="cover" placeholder="Link immagine copertina" required>
+
+    <select name="clip_type" required>
+        <option value="mp3">MP3</option>
+        <option value="spotify">Spotify</option>
+        <option value="youtube">YouTube</option>
+    </select>
+
+    <input type="text" name="mood" placeholder="Mood (Rock, Chill, Happy...)" required>
+
+    <button type="submit">POST</button>
+</form>
+{% else %}
+<p class="intro">Per pubblicare un post, effettua il <a href="/login">login</a> o <a href="/register">registrati</a>.</p>
+{% endif %}
+
+{% endblock %}

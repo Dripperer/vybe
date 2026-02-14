@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="profile-header">
+    <img src="{{ profile_user['avatar'] }}" class="avatar-large">
+    <div>
+        <h1>{{ profile_user["username"] }}</h1>
+        <p>{{ profile_user["bio"] }}</p>
+    </div>
+</div>
+
+<h2>I suoi post</h2>
+<div class="feed">
+    {% for post in posts %}
+    <div class="post">
+        <img src="{{ post['cover'] }}" class="cover">
+        <h2>{{ post["song"] }}</h2>
+        <p class="artist">{{ post["artist"] }}</p>
+        <span class="mood mood-{{ post['mood']|lower }}">{{ post["mood"] }}</span>
+        <span class="like-static">❤️ {{ post["likes"] }}</span>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

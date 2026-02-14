@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1 class="logo">Registrati</h1>
+
+<form class="auth-form" action="/register" method="post">
+    {% if error %}
+    <p class="error">{{ error }}</p>
+    {% endif %}
+    <input type="text" name="username" placeholder="Username" required>
+    <input type="password" name="password" placeholder="Password" required>
+    <input type="text" name="bio" placeholder="Bio (chi sei, cosa ascolti)" required>
+    <input type="text" name="avatar" placeholder="Link avatar (opzionale)">
+    <button type="submit">Crea account</button>
+</form>
+
+<p class="intro">Hai già un account? <a href="/login">Login</a></p>
+
+{% endblock %}

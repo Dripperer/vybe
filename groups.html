@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1 class="logo">⟡ VYBE COVES</h1>
+
+{% if current_user %}
+<h2>Crea un nuovo COVE</h2>
+<form action="/add_group" method="post" class="group-form">
+    <input type="text" name="name" placeholder="Nome gruppo" required>
+    <input type="text" name="description" placeholder="Descrizione" required>
+    <button type="submit">Crea</button>
+</form>
+{% else %}
+<p class="intro">Effettua il <a href="/login">login</a> per creare un nuovo COVE.</p>
+{% endif %}
+
+<h2>Gruppi disponibili</h2>
+<div class="feed">
+    {% for group in groups %}
+    <div class="post">
+        <h3>{{ group["name"] }}</h3>
+        <p>{{ group["description"] }}</p>
+        <a href="/groups/{{ group['id'] }}" class="external-link">Entra nel COVE</a>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

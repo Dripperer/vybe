@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1 class="logo">⟡ {{ group["name"] }}</h1>
+<p class="intro">{{ group["description"] }}</p>
+
+<div class="chat">
+    {% for msg in messages %}
+    <div class="chat-message">
+        <img src="{{ msg['avatar'] }}" class="avatar-small">
+        <div>
+            <span class="chat-username">{{ msg["username"] }}</span>
+            <p>{{ msg["text"] }}</p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% if current_user %}
+<form class="chat-form" action="" method="post">
+    <input type="text" name="text" placeholder="Scrivi un messaggio..." required>
+    <button type="submit">Invia</button>
+</form>
+{% else %}
+<p class="intro">Effettua il <a href="/login">login</a> per scrivere nel COVE.</p>
+{% endif %}
+
+{% endblock %}
